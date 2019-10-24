@@ -16,6 +16,7 @@ nameHash = {
     "laughing": "刘华峰",
     "嘿然": "周泽林",
     "局长": "程军",
+    "ZHAN": "占志虎",
     "发起人1号订餐人": "韩小松"
 }
 time = "23/10/2019"
@@ -33,6 +34,8 @@ order = r["group"]
 
 if not os.path.exists("ele.xlsx"):
     wb = Workbook()
+    ws = wb.create_sheet(u"进出表")
+    ws1 = wb.create_sheet(u"补助表")
     wb.save("ele.xlsx")
 
 subsidy2orderer = packing_fee + agent_fee
