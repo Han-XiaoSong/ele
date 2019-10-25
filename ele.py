@@ -1,4 +1,6 @@
-
+'''
+    每餐修改“发起人1号订餐人”，“time”和“hongbao”
+'''
 import requests
 import json
 import os
@@ -15,10 +17,10 @@ nameHash = {
     "嘿然": "周泽林",
     "局长": "程军",
     "ZHAN": "占志虎",
-    "发起人1号订餐人": "韩小松"
+    "发起人1号订餐人": "王帅"
 }
-time = "23/10/2019"
-hongbao = 0
+time = "25/10/2019"
+hongbao = 6
 
 srcUrl = 'https://h5.ele.me/spell/?cartId=cart61d9d9a78c2e46ed96606decb16331c1&sig=c442271460c68771eb60cc5ee23644f5&restaurant_id=E7149211220298205603'
 
@@ -32,11 +34,17 @@ def concatUrl():
     return 'https://h5.ele.me/restapi/booking/v1/carts/' + getUrlValueByKey('cartId')+'?sig='+getUrlValueByKey('sig')+'&from=pindan&extras[]=restaurant_info&extras[]=share_pindan&extras[]=order_status'
 
 
-
+def getResponseJson():
+    if os.path.exists("order.json"):
+        with open("order.json", "r") as f:
+            return json.load(f)
+    else:
+        print("order.json doesn't exist")
 # url = 'https://h5.ele.me/restapi/booking/v1/carts/cart324d5ba94d6c41d588e456ac46ee574d?sig=ee522f6ac50c05b03af130bf0e8081c7&from=pindan&extras[]=restaurant_info&extras[]=share_pindan&extras[]=order_status&random=0.20294561891709595'
 url = concatUrl()
 
-r = requests.get(url).json()
+# r = requests.get(url).json()
+r = getResponseJson()
 
 total = r["total"]
 discount_amount = -r["discount_amount"] + hongbao
@@ -56,9 +64,13 @@ wb = load_workbook("ele.xlsx")
 ws = wb["进出表"]
 
 for i in range(len(names)):
-    prename = names[i]["name"]
-    # name = nameHash[prename]
-    name = prename
+    try:
+        name = nameHash[names[i]["name"]]
+    except KeyError:
+        name = nameHash["发起人1号订餐人"]
+    # prename = names[i]["name"]
+    # # name = nameHash[prename]
+    # name = prename
     groupIndex = names[i]["group_index"]
     orders = order[groupIndex]
 

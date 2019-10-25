@@ -8,7 +8,9 @@ module.exports = {
     summary: 'a rule to hack response',
     *beforeSendResponse(requestDetail, responseDetail) {
       if (requestDetail.url.startsWith("https://h5.ele.me/restapi/booking/v1/carts/cart")) {
-        fs.writeFile("order.json", responseDetail.response.body,()=>{})
+        fs.writeFile("order.json", responseDetail.response.body,()=>{
+            console.log("HHHH")
+        })
         return {
             response: responseDetail
         }
