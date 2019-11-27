@@ -17,10 +17,12 @@ nameHash = {
     "嘿然": "周泽林",
     "局长": "程军",
     "ZHAN": "占志虎",
-    "发起人1号订餐人": "王帅"
+    "高级灰": "郑辉",
+    "佳哼": "李佳珩",
+    "发起人1号订餐人": "刘华峰"
 }
-time = "25/10/2019"
-hongbao = 6
+time = "25/11/2019"
+hongbao = 0
 
 srcUrl = 'https://h5.ele.me/spell/?cartId=cart61d9d9a78c2e46ed96606decb16331c1&sig=c442271460c68771eb60cc5ee23644f5&restaurant_id=E7149211220298205603'
 
@@ -62,12 +64,11 @@ if not os.path.exists("ele.xlsx"):
 subsidy2orderer = packing_fee + agent_fee
 wb = load_workbook("ele.xlsx")
 ws = wb["进出表"]
-
 for i in range(len(names)):
-    try:
-        name = nameHash[names[i]["name"]]
-    except KeyError:
-        name = nameHash["发起人1号订餐人"]
+    # try:
+    name = nameHash[names[i]["name"]]
+    # except KeyError:
+        # name = nameHash["发起人1号订餐人"]
     # prename = names[i]["name"]
     # # name = nameHash[prename]
     # name = prename
@@ -77,7 +78,6 @@ for i in range(len(names)):
     originalFee = 0
     for eachOrder in orders:
         originalFee += eachOrder["total_price"]
-
     discount = round((originalFee * discount_amount /
                       (total - packing_fee - agent_fee)), 2)
     subsidy = 15
@@ -93,7 +93,6 @@ for i in range(len(names)):
 
     subsidy2orderer += subsidy
 # wb.save("ele.xlsx")
-
 # wb1 = load_workbook("ele.xlsx")
 ws1 = wb["补助表"]
 row1 = len(ws1["A"]) + 1
