@@ -22,7 +22,7 @@ nameHash = {
     "发起人1号订餐人": "刘华峰"
 }
 time = "25/11/2019"
-hongbao = 0
+hongbao = 2
 
 srcUrl = 'https://h5.ele.me/spell/?cartId=cart61d9d9a78c2e46ed96606decb16331c1&sig=c442271460c68771eb60cc5ee23644f5&restaurant_id=E7149211220298205603'
 
